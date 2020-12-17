@@ -37,7 +37,8 @@ var result = func(a, b int) int {
 
 func main() {
 	fmt.Println("Factorial of 4", factorial(4)) //Factorial of 4 24
-	defer anotherFunc() //defer keword in GO makes a function execute at the end of the execution (or when hits return statement) of parent function from where it is called.
+	defer anotherFunc() //defer keword in GO makes a function execute at the end of the
+	//execution (or when hits return statement) of parent function from where it is called.
 	fmt.Println("HI I am MAIN and I execute first instead of defer function")
 	fmt.Println("HI I am MAIN and I execute first instead of defer function")
 	fmt.Println("HI I am MAIN and I execute first instead of defer function")
