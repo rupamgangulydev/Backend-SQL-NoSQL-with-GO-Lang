@@ -47,6 +47,31 @@ func main() {
 }
 
 ```
+#### 		OUTPUT:
+```shell
+	in main function address of c is :  0xc000012090
+	in main function d is :  0xc000012090
+	in main function *d is :  7
+	passedasReferencee called:--->       
+	*a is :  7
+	a is :  0xc000012090
+	address of a variable is:  0xc000006030
+	Incrementing:
+	*a is :  8
+	a is :  0xc000012090
+	after executing function :-
+	c is :  8
+	d is :  0xc000012090
+	*d is  8
+	passedasVariable called:--->
+	a is :  8
+	address of a variable is:  0xc000012098
+	Incrementing:
+	a is :  9
+	after executing function :-
+	c is :  8
+	d is :  0xc000012090
+```
 ### STRUCT
 ```go
 package main
@@ -134,6 +159,26 @@ func main() {
 	fmt.Println(nestedstructMy.data.string) // new data inserted
 }
 ```
+#### OUTPUT
+```shell
+{  0 false}
+{Rupam Ganguly 45000 true}
+{Rintu Ganguly 58000 true}
+{my mosh ganguly 90000 true}
+{12 12345 true}
+&{Rintu Ganguly 58000 true}
+{Rintu Ganguly 58000 true}
+first name :  Rintu
+Rintu
+{Monday time true}
+{Monday time false}
+{Sunday false}
+{Monday time false}
+{Rintu Ganguly 58000 true {new data inserted true}}
+58000
+new data inserted
+```
+
 ### INTERFACE
 
 ```go
@@ -199,6 +244,14 @@ func main() {
 
 }
 ```
+#### OUTPUT
+```shell
+30
+boom bart i am multiple interface
+9.874321e+06
+62.83185307179586
+P
+```
 ### MIMIC OF INHERITANCE
 
 ```go
@@ -249,4 +302,12 @@ func main() {
 	fmt.Println(childObj.basFuncTwo()) // I am Base Function ONE // I am Base Function TWO
 	fmt.Println(childObj.childFunc())
 }
+```
+#### OUTPUT
+```shell
+{{Black White} bold 32}
+{{Green Red} bold 16}
+I am Base Function ONE
+I am Base Function TWO
+I am Child Function 
 ```
