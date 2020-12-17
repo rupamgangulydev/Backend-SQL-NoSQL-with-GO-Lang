@@ -20,11 +20,39 @@ func factorial(num int) int {
 	}
 	return 1
 }
-func main() {
-	fmt.Println("Factorial of 4", factorial(4)) //Factorial of 4 24
+func anotherFunc() {
+	fmt.Println("I am Another Function")
 }
 
+// Function as value - Anonymous function
+var result = func(a, b int) int {
+	return a + b
+}
+
+func main() {
+	fmt.Println("Factorial of 4", factorial(4)) //Factorial of 4 24
+	defer anotherFunc()
+	fmt.Println("HI I am MAIN and I execute first instead of defer function")
+	fmt.Println("HI I am MAIN and I execute first instead of defer function")
+	fmt.Println("HI I am MAIN and I execute first instead of defer function")
+	fmt.Println("Calling Function as value - Anonymous function", result(6, 9))
+	subtra := func(a, b int) int {
+		return a - b
+	}(89, 20)
+	fmt.Println("Subtra is caling: ", subtra)
+}
 ```
+#### OUTPUT
+```shell
+Factorial of 4 24
+HI I am MAIN and I execute first instead of defer function
+HI I am MAIN and I execute first instead of defer function
+HI I am MAIN and I execute first instead of defer function
+Calling Function as value - Anonymous function 15
+Subtra is caling:  69
+I am Another Function
+```
+defer keword in GO makes a function execute at the end of the execution (or when hits return statement) of parent function from where it is called.
 SIGNATURE of FUNCTION:
 ```go
 func function_name (argument1 type, argument2 type) (return_type1, return_type2){
