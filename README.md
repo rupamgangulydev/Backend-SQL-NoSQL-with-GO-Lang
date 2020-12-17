@@ -9,10 +9,11 @@
 
 ## Section 2 : GO Lang Fundamentals:
 ### VARIABLE
+Here i is the name of the variable. Type of the variable is int.
 ```go
-var i int
+var int i // SYNTAX ERROR
+var i int // // SYNTAX IS CORRECT
 ```
-i is the name of the variable, Type of the variable is int.
 ### FUNCTION
 SIGNATURE of FUNCTION:
 ```go
