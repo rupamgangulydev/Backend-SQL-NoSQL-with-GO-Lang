@@ -565,7 +565,14 @@ func main() {
 		}
 	}
 	fmt.Println(slicef) // [[0 1 2] [3 4 5] [6 7 8] [9 10 11] [12 13 14]]
-	
+	fmt.Println(x)      // []
+	x = append(x, 34)
+	fmt.Println(x) // [34]
+	x = append(x, 12, 7, 9, 1)
+	fmt.Println(x) // [34 12 7 9 1]
+	for i, v := range x {
+		fmt.Printf("INDEX: %d Value: %d \n ", i, v)
+	}
 }
 ```
 #### OUTPUT
@@ -589,4 +596,14 @@ PS E:\PROJECTS\BACKEND\gobackendcrud> go run datastructure.go
  row 3 ->  col 0 col 1 col 2
  row 4 ->  col 0 col 1 col 2
 [[0 1 2] [3 4 5] [6 7 8] [9 10 11] [12 13 14]]
+[]
+[34]
+[34 12 7 9 1]
+INDEX: 0 Value: 34
+ INDEX: 1 Value: 12
+ INDEX: 2 Value: 7
+ INDEX: 3 Value: 9 
+ INDEX: 4 Value: 1
 ```
+### MAP
+Maps are a convenient and powerful built-in data structure that associate values of one type (the key) with values of another type (the element or value). The key can be of any type for which the equality operator is defined, such as integers, floating point and complex numbers, strings, pointers, interfaces (as long as the dynamic type supports equality), structs and arrays. Slices cannot be used as map keys, because equality is not defined on them. Like slices, maps hold references to an underlying data structure. If you pass a map to a function that changes the contents of the map, the changes will be visible in the caller.
