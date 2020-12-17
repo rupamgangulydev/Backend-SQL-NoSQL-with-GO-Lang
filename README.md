@@ -279,7 +279,7 @@ An interface is a collection of method signatures that a Type(struct) can implem
 An interface is declared using the type keyword, followed by the name of the interface and the keyword interface. Then, we specify a set of method signatures inside curly braces.
 Go Interface doesn’t have fields and also it doesn’t allow the definition of methods inside it. Any type needs to implements all methods of interface to become of that interface type.
 To implement an interface, you just need to implement all the methods declared in the interface.
-We will use a combination of a interface (abstract interface) and struct (abstract concrete type). Together they can provide the functionalities of an abstract class.
+
 ```go
 package main
 
@@ -351,6 +351,8 @@ Implements multiple interfaces
 62.83185307179586
 
 ```
+
+
 ### Type Assertion
 
 Findout the Type of Dynamic Value of an interface
@@ -622,6 +624,38 @@ INDEX: 0 Value: 34
  INDEX: 2 Value: 7
  INDEX: 3 Value: 9 
  INDEX: 4 Value: 1
+```
+```go
+package main
+
+import "fmt"
+
+func main() {
+	slicel := []string{"A", "B", "C", "D", "E", "F", "G"}
+	i := 3
+	fmt.Println(slicel) // [A B C D E F G]
+	slicel[i] = slicel[len(slicel)-1]
+	slicel[len(slicel)-1] = ""
+	slicel = slicel[:len(slicel)-1]
+	fmt.Println(slicel) // [A B C G E F]
+	slicel = []string{"A", "B", "C", "D", "E", "F", "G"}
+	fmt.Println(slicel) // [A B C D E F G]
+	copy(slicel[i:], slicel[i+1:])
+	fmt.Println(slicel) // [A B C E F G G]
+	slicel[len(slicel)-1] = ""
+	fmt.Println(slicel) // [A B C E F G ]
+	slicel = slicel[:len(slicel)-1]
+	fmt.Println(slicel) // [A B C E F G]
+}
+```
+#### OUTPUT
+```shell
+[A B C D E F G]
+[A B C G E F]
+[A B C D E F G]
+[A B C E F G G]
+[A B C E F G ]
+[A B C E F G]
 ```
 ### MAP
 Maps are a convenient and powerful built-in data structure that associate values of one type (the key) with values of another type (the element or value). The key can be of any type for which the equality operator is defined, such as integers, floating point and complex numbers, strings, pointers, interfaces (as long as the dynamic type supports equality), structs and arrays. Slices cannot be used as map keys, because equality is not defined on them. Like slices, maps hold references to an underlying data structure. If you pass a map to a function that changes the contents of the map, the changes will be visible in the caller.
