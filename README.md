@@ -2,7 +2,7 @@
 
 ## Section 1 : Why use GO Lang as Backend :
 
-| Attempt 1 | Attempt 2  | Attempt 3  | Attempt 4  |
+|  NodeJs v/s Go | Reddit Post  | Reddit Post  | Valorent's Backend  |
 | :---:   | :-: | :-: | :-: |
 | <img src="/ASSETS/1.png" width=850> | <img src="/ASSETS/2.png"> | <img src="/ASSETS/3.png"> |  <img src="/ASSETS/4.png"> |
 
@@ -428,37 +428,33 @@ I am Base Function ONE
 I am Base Function TWO
 I am Child Function 
 ```
-### Data Structures 
+### Allocation
 
- In Go, like many other languages, arrays are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow.Once you declare an array with its size you are not allowed to change it.
-If you try to insert more elements than array size, compiler will give you an error.
-By default array size is 0 (zero)
-Array index starts from 0th index
-We can set value directly to array at particular index array_name[index]=value
-The inbuilt len returns length of an array
- Slice also has continuous segments of memory locations.
- The most important and useful data structure in computer science is the Hash Table. Golang provides a map data structure that implements hashtable. A unique key-value pair like a dictionary is used to look up values based on the key.
+Go has two allocation primitives, the built-in functions new and make. new is a built-in function that allocates memory, but unlike its namesakes in some other languages it does not initialize the memory, it only zeros it. That is, new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T. 
+
 ```go
-var scores [10]int
-scores[0] = 339
-// We can initialize the array with values:
-scores := [4]int{9001, 9333, 212, 33}
-// A slice is a lightweight structure that wraps and
-// represents a portion of an array.
-var scores []int
-// let’s see another way to create a slice
-scores := []int{1,4,293,4,9}
-// let’s see another way to create a slice, using make:
-scores := make([]int, 10)
-// Unlike the array declaration, our slice isn’t declared with a length within the square brackets
-scores=append(scores, 789)
-scores=append(scores, 239,345)
-// Delete from Slice
+package main
 
+import "fmt"
 
-var dictionary map[string]int //map using var
- dictionary[“Zero”]=1
- fmt.Println(dictionary[“Zero”]) //Accessing value using key
- 
- dictionary:=make(map[string]int) //map using make(
+type myBox struct {
+	index int
+	data  int
+}
+
+func main() {
+	obj1 := new(myBox)
+	fmt.Println(obj1)  // &{0 0}
+	fmt.Println(*obj1) // {0 0}
+	var obj2 myBox
+	fmt.Println(obj2) // {0 0}
+	//fmt.Println(*obj2) // invalid indirect of obj2 (type myBox)
+}
 ```
+#### OUTPUT
+```shell
+&{0 0}
+{0 0}
+{0 0}
+```
+The built-in function make(T, args) serves a purpose different from new(T). It creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T). The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. 
