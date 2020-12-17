@@ -223,7 +223,7 @@ func (c Circle) Area() float64 {
 	return 7
 }
 func (r Rect) NewArea() string {
-	return "boom bart i am multiple interface"
+	return "Implements multiple interfaces"
 }
 func (r Rect) NewPerimeter() float64 {
 	return 9874321
@@ -233,7 +233,7 @@ func main() {
 	s.Area() // 30
 	// multiple interface of Rect
 	var ns AnotherShape = Rect{5, 8}
-	fmt.Println(ns.NewArea())      // boom bart i am multiple interface
+	fmt.Println(ns.NewArea())      // Implements multiple interfaces
 	fmt.Println(ns.NewPerimeter()) // 9.874321e+06
 	s = Circle{10}
 	s.Perimeter() // 62.83185307179586
@@ -247,7 +247,7 @@ func main() {
 #### OUTPUT
 ```shell
 30
-boom bart i am multiple interface
+Implements multiple interfaces
 9.874321e+06
 62.83185307179586
 P
