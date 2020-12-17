@@ -1,5 +1,4 @@
 
-Using Go language as backend of REST API  for Frontend like android flutter react vue etc...
 
 ## Section 1 : Why use GO Lang as Backend :
 
