@@ -60,6 +60,33 @@ func function_name (argument1 type, argument2 type) (return_type1, return_type2)
 	return a,b
 }
 ```
+### ComandLine Argument Passing
+```go
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	if len(os.Args) != 2 {
+		// If you’re wondering why we expect 2 arguments,
+		// it’s because the first argument – at index 0 – is always
+		// the path of the currently running executable.
+		os.Exit(1)
+	}
+	fmt.Println("It's over", os.Args[1])
+}
+```
+#### OUTPUT
+```shell
+PS E:\PROJECTS\BACKEND\gobackendcrud> go run demo.go
+exit status 1
+PS E:\PROJECTS\BACKEND\gobackendcrud> go run demo.go 1234
+It's over 1234
+PS E:\PROJECTS\BACKEND\gobackendcrud> 
+```
 ### POINTER
 ```go
 package main
