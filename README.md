@@ -1,6 +1,6 @@
 # GO-lang-Backend-REST-MongoDB
 Go language as backend of REST API  for android flutter
-## INTRODUCTION:
+## INTRODUCTION OF BASIC GO SYNTAX:
 ### POINTER
 ```go
 package main
