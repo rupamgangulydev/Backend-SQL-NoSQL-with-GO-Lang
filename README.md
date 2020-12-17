@@ -53,6 +53,7 @@ Subtra is caling:  69
 I am Another Function
 ```
 defer keword in GO makes a function execute at the end of the execution (or when hits return statement) of parent function from where it is called.
+
 SIGNATURE of FUNCTION:
 ```go
 func function_name (argument1 type, argument2 type) (return_type1, return_type2){
