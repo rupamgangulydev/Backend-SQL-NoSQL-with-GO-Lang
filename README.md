@@ -160,6 +160,12 @@ func main() {
 	c is :  8
 	d is :  0xc000012090
 ```
+
+#### Go lang tries to distance itself from object-oriented terminology, at the same time it can give you all object-oriented programming flavors and benefits.
+####  For instance,
+#### C++ or Java classes are called a struct,
+#### A class methods are called receivers.
+#### Inheritance is called embedding
 ### STRUCT
 ```go
 package main
@@ -269,6 +275,11 @@ new data inserted
 
 ### INTERFACE
 
+An interface is a collection of method signatures that a Type(struct) can implement (using methods). Hence interface defines (not declares) the behavior of the object
+An interface is declared using the type keyword, followed by the name of the interface and the keyword interface. Then, we specify a set of method signatures inside curly braces.
+Go Interface doesn’t have fields and also it doesn’t allow the definition of methods inside it. Any type needs to implements all methods of interface to become of that interface type.
+To implement an interface, you just need to implement all the methods declared in the interface.
+We will use a combination of a interface (abstract interface) and struct (abstract concrete type). Together they can provide the functionalities of an abstract class.
 ```go
 package main
 
