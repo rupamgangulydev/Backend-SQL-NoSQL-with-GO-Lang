@@ -625,6 +625,7 @@ INDEX: 0 Value: 34
  INDEX: 3 Value: 9 
  INDEX: 4 Value: 1
 ```
+#### Deleting Element From Slice
 ```go
 package main
 
