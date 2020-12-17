@@ -573,6 +573,11 @@ func main() {
 	for i, v := range x {
 		fmt.Printf("INDEX: %d Value: %d \n ", i, v)
 	}
+		//  INDEX: 0 Value: 34
+		//  INDEX: 1 Value: 12
+		//  INDEX: 2 Value: 7
+		//  INDEX: 3 Value: 9 
+		//  INDEX: 4 Value: 1
 }
 ```
 #### OUTPUT
