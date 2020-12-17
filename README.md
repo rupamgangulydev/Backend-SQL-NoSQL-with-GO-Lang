@@ -14,7 +14,7 @@ func passedasReferencee(a *int) { // d is passed
 	fmt.Println("a is : ", a)
 	fmt.Println("address of a variable is: ", &a)
 	fmt.Println("Incrementing:")
-	*a++ // incrementing value of a *a was 7 now *a will be 8
+	*a++ // incrementing value - *a was 7 , now *a will be 8
 	fmt.Println("*a is : ", *a)
 	fmt.Println("a is : ", a)
 
