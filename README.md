@@ -10,8 +10,9 @@
 ## Section 2 : GO Lang Fundamentals:
 ### VARIABLE
 Here i is the name of the variable. Type of the variable is int.
+
+~~var int i  // syntax error~~
 ```go
- ~~ var int i  ~~// SYNTAX ERROR
 var i int // // SYNTAX IS CORRECT
 ```
 ### FUNCTION
