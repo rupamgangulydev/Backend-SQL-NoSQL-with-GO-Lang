@@ -397,3 +397,20 @@ I am Base Function ONE
 I am Base Function TWO
 I am Child Function 
 ```
+### Data Structures 
+
+ In Go, like many other languages, arrays
+are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow:
+```go
+var scores [10]int
+scores[0] = 339
+// We can initialize the array with values:
+scores := [4]int{9001, 9333, 212, 33}
+// A slice is a lightweight structure that wraps and
+// represents a portion of an array.
+scores := []int{1,4,293,4,9}
+// let’s see another way to create a slice, using make:
+scores := make([]int, 10)
+// Unlike the array declaration, our slice isn’t declared with a length within the square brackets
+
+```
