@@ -338,6 +338,37 @@ Implements multiple interfaces
 62.83185307179586
 P
 ```
+### Type Assertion
+
+Findout the Type of Dynamic Value of an interface
+
+```go
+package main
+
+import "fmt"
+
+func explain(i interface{}) {
+	switch i.(type) {
+	case string:
+		fmt.Println(" Interface has a String")
+	case int:
+		fmt.Println("Interface has a Int")
+	default:
+		fmt.Println("Interface has other Type")
+	}
+}
+func main() {
+	explain("Rupam Ganguly")
+	explain(45.987)
+	explain(43)
+}
+```
+#### OUTPUT
+```shell
+ Interface has a String
+Interface has other Type
+Interface has a Int
+```
 ### MIMIC OF INHERITANCE
 
 ```go
@@ -399,8 +430,7 @@ I am Child Function
 ```
 ### Data Structures 
 
- In Go, like many other languages, arrays
-are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow:
+ In Go, like many other languages, arrays are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow:
 ```go
 var scores [10]int
 scores[0] = 339
