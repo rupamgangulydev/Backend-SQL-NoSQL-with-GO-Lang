@@ -8,7 +8,29 @@
 
 
 ## Section 2 : GO Lang Fundamentals:
+### FUNCTION
+```go
+package main
 
+import "fmt"
+
+func factorial(num int) int {
+	if num > 1 {
+		return num * factorial(num-1)
+	}
+	return 1
+}
+func main() {
+	fmt.Println("Factorial of 4", factorial(4)) //Factorial of 4 24
+}
+
+```
+SIGNATURE of FUNCTION:
+```go
+func function_name (argument1 type, argument2 type) (return_type1, return_type2){
+	return a,b
+}
+```
 ### POINTER
 ```go
 package main
