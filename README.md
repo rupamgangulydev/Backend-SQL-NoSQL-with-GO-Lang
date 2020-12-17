@@ -438,9 +438,14 @@ scores[0] = 339
 scores := [4]int{9001, 9333, 212, 33}
 // A slice is a lightweight structure that wraps and
 // represents a portion of an array.
+var scores []int
+// let’s see another way to create a slice
 scores := []int{1,4,293,4,9}
 // let’s see another way to create a slice, using make:
 scores := make([]int, 10)
 // Unlike the array declaration, our slice isn’t declared with a length within the square brackets
+scores=append(scores, 789)
+scores=append(scores, 239,345)
+// Delete from Slice
 
 ```
