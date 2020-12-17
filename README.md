@@ -2,10 +2,10 @@
 Using Go language as backend of REST API  for Frontend like android flutter react vue etc...
 
 ## Section 1 : Why use GO Lang as Backend :
-
-| Attempt 1 | Attempt 2  | Attempt 3  | Attempt 4  |
-| :---:   | :-: | :-: | :-: |
-| <img src="/ASSETS/1.png"> | <img src="/ASSETS/2.png"> | <img src="/ASSETS/3.png"> |  <img src="/ASSETS/4.png"> |
+<img src="/ASSETS/1.png" width=400px> 
+| Attempt 1 | Attempt 2  | Attempt 3  |
+| :---:   | :-: | :-: |
+| <img src="/ASSETS/2.png"> | <img src="/ASSETS/3.png"> |  <img src="/ASSETS/4.png"> |
 
 
 
