@@ -430,7 +430,14 @@ I am Child Function
 ```
 ### Data Structures 
 
- In Go, like many other languages, arrays are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow:
+ In Go, like many other languages, arrays are fixed. Declaring an array requires that we specify the size, and once the size is specified, it cannot grow.Once you declare an array with its size you are not allowed to change it.
+If you try to insert more elements than array size, compiler will give you an error.
+By default array size is 0 (zero)
+Array index starts from 0th index
+We can set value directly to array at particular index array_name[index]=value
+The inbuilt len returns length of an array
+ Slice also has continuous segments of memory locations.
+ The most important and useful data structure in computer science is the Hash Table. Golang provides a map data structure that implements hashtable. A unique key-value pair like a dictionary is used to look up values based on the key.
 ```go
 var scores [10]int
 scores[0] = 339
@@ -448,4 +455,10 @@ scores=append(scores, 789)
 scores=append(scores, 239,345)
 // Delete from Slice
 
+
+var dictionary map[string]int //map using var
+ dictionary[“Zero”]=1
+ fmt.Println(dictionary[“Zero”]) //Accessing value using key
+ 
+ dictionary:=make(map[string]int) //map using make(
 ```
