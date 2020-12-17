@@ -8,6 +8,11 @@
 
 
 ## Section 2 : GO Lang Fundamentals:
+### VARIABLE
+```go
+var i int
+```
+i is the name of the variable, Type of the variable is int.
 ### FUNCTION
 SIGNATURE of FUNCTION:
 ```go
