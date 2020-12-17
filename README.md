@@ -336,7 +336,7 @@ func main() {
 Implements multiple interfaces
 9.874321e+06
 62.83185307179586
-P
+
 ```
 ### Type Assertion
 
@@ -365,7 +365,7 @@ func main() {
 ```
 #### OUTPUT
 ```shell
- Interface has a String
+Interface has a String
 Interface has other Type
 Interface has a Int
 ```
@@ -458,3 +458,135 @@ func main() {
 {0 0}
 ```
 The built-in function make(T, args) serves a purpose different from new(T). It creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T). The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. 
+
+### Array
+
+Basically, an array is a number of elements of same type stored in sequential order.
+
+Once you declare an array with its size you are not allowed to change it.
+
+If you try to insert more elements than array size, compiler will give you an error.
+
+By default array size is 0 (zero)
+
+Array index starts from 0th index
+
+We can set value directly to array at particular index array_name[index]=value
+
+The inbuilt len returns length of an array
+```go
+package main
+
+import "fmt"
+
+func main() {
+	x := [12]int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	fmt.Println(x) // [1 2 3 4 5 6 7 8 9 0 0 0]
+	var y [12]int
+	fmt.Println(y) // [0 0 0 0 0 0 0 0 0 0 0 0]
+	y[5] = 45
+	y[2] = 12
+	fmt.Println(y) // [0 0 12 0 0 45 0 0 0 0 0 0]
+	y[5] = 123
+	fmt.Println(y) // [0 0 12 0 0 123 0 0 0 0 0 0]
+	fmt.Println("length of y: ", len(y)) // length of y:  12
+	for i := 0; i < len(y); i++ {
+		fmt.Print(y[i], " - ") // 0 - 0 - 12 - 0 - 0 - 123 - 0 - 0 - 0 - 0 - 0 - 0 -
+	}
+	fmt.Println()
+	for i := 0; i < len(y); i++ {
+		fmt.Print(y[i]+x[i], " - ") // 1 - 2 - 15 - 4 - 5 - 129 - 7 - 8 - 9 - 0 - 0 - 0 -
+	}
+}
+```
+#### OUTPUT
+```shell
+[1 2 3 4 5 6 7 8 9 0 0 0]
+[0 0 0 0 0 0 0 0 0 0 0 0]
+[0 0 12 0 0 45 0 0 0 0 0 0]
+[0 0 12 0 0 123 0 0 0 0 0 0]
+length of y:  12
+0 - 0 - 12 - 0 - 0 - 123 - 0 - 0 - 0 - 0 - 0 - 0 -
+1 - 2 - 15 - 4 - 5 - 129 - 7 - 8 - 9 - 0 - 0 - 0 - 
+```
+### SLICE
+
+Slice is the same as an array but it has a variable length so we don’t need to specify the length to it. It will grow whenever it exceeds its size. Like an array, slice also has index and length but its length can be changed.
+
+Slice also has continuous segments of memory locations
+
+The default value of uninitialized slice is nil
+
+Slices does not store the data. It just provides reference to an array
+
+As we change the elements of slice, it will modify corresponding elements of that array
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var x []int
+	fmt.Println(x) // []
+	y := []int{2, 3, 4, 5, 6, 7}
+	fmt.Println(y) // [2 3 4 5 6 7]
+	z := make([]int, 12)
+	fmt.Println(z)      // [0 0 0 0 0 0 0 0 0 0 0 0]
+	fmt.Println(y[3:5]) // [5 6]
+	fmt.Println(y[1:5]) // [3 4 5 6]
+	fmt.Println(y[:4])  // [2 3 4 5]
+	sl := make([][]int, 12)
+	fmt.Println(sl) // [[] [] [] [] [] [] [] [] [] [] [] []]
+	for i := range sl {
+		fmt.Print(sl[i], " -> ") // [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] ->
+	}
+	fmt.Println()
+	slicef := [5][3]int{}
+	fmt.Println(slicef) // [[0 0 0] [0 0 0] [0 0 0] [0 0 0] [0 0 0]]
+	//slicef[1][1] = j
+	for i := range slicef {
+		fmt.Print(" row ", i, " -> ")
+		for j := 0; j < len(slicef[0]); j++ {
+			fmt.Print(" col ", j)
+		}
+		fmt.Println()
+
+	}
+	// row 0 ->  col 0 col 1 col 2
+	// row 1 ->  col 0 col 1 col 2
+	// row 2 ->  col 0 col 1 col 2
+	// row 3 ->  col 0 col 1 col 2
+	// row 4 ->  col 0 col 1 col 2
+	k := 0
+	for i := range slicef {
+		for j := 0; j < len(slicef[0]); j++ {
+			slicef[i][j] = k
+			k++
+		}
+	}
+	fmt.Println(slicef) // [[0 1 2] [3 4 5] [6 7 8] [9 10 11] [12 13 14]]
+	
+}
+```
+#### OUTPUT
+```shell
+[]
+[2 3 4 5 6 7]
+[0 0 0 0 0 0 0 0 0 0 0 0]
+PS E:\PROJECTS\BACKEND\gobackendcrud> go run datastructure.go
+[]
+[2 3 4 5 6 7]
+[0 0 0 0 0 0 0 0 0 0 0 0]
+[5 6]
+[3 4 5 6]
+[2 3 4 5]
+[[] [] [] [] [] [] [] [] [] [] [] []]
+[] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> [] -> 
+[[0 0 0] [0 0 0] [0 0 0] [0 0 0] [0 0 0]]
+ row 0 ->  col 0 col 1 col 2
+ row 1 ->  col 0 col 1 col 2
+ row 2 ->  col 0 col 1 col 2
+ row 3 ->  col 0 col 1 col 2
+ row 4 ->  col 0 col 1 col 2
+[[0 1 2] [3 4 5] [6 7 8] [9 10 11] [12 13 14]]
+```
