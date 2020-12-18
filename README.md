@@ -493,7 +493,7 @@ func main() {
 {0 0}
 {0 0}
 ```
-The built-in function make(T, args) serves a purpose different from new(T). It creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T). The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. 
+The built-in function make(T, args) serves a purpose different from new(T). It creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T). The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. Example of make function is present in Sliice section...
 
 ### Array
 
@@ -681,4 +681,126 @@ func main() {
 ```
 ### MAP
 Maps are a convenient and powerful built-in data structure that associate values of one type (the key) with values of another type (the element or value). The key can be of any type for which the equality operator is defined, such as integers, floating point and complex numbers, strings, pointers, interfaces (as long as the dynamic type supports equality), structs and arrays. Slices cannot be used as map keys, because equality is not defined on them. Like slices, maps hold references to an underlying data structure. If you pass a map to a function that changes the contents of the map, the changes will be visible in the caller.
+```go
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+var myMap map[int]string
+
+func main() {
+	fmt.Println(myMap) // map[]
+	//myMap[12] = "I am value of key 12 "
+	//fmt.Println(myMap) // panic: assignment to entry in nil map
+
+	// Map types are reference types, like pointers or slices,
+	//  and so the value of myMap above is nil; it doesn't point to an initialized map.
+	// A nil map behaves like an empty map when reading,
+	// but attempts to write to a nil map will cause a runtime panic; don't do that.
+	// To initialize a map, use the built in make function:
+	myMap = make(map[int]string)
+	fmt.Println(myMap) //map[]
+	myMapOne := map[int]int{}
+	fmt.Println(myMapOne) // map[]
+	myMap[16] = "I am value of key 16"
+	fmt.Println(myMap) // map[16:I am value of key 16]
+	myMap[17] = "I am value of key 17"
+	fmt.Println(myMap) // map[16:I am value of key 16 17:I am value of key 17]
+	myMap[21] = "I am value of key 21"
+	fmt.Println(myMap) // map[16:I am value of key 16 17:I am value of key 17 21:I am value of key 21]
+	val := myMap[17]
+	fmt.Println(val) // I am value of key 17
+	anotherVal, isPresent := myMap[12345]
+	fmt.Println(anotherVal, "->", isPresent) // -> false
+	//The built in delete function removes an entry from the map:
+	delete(myMap, 16)
+	fmt.Println(myMap)      // map[17:I am value of key 17 21:I am value of key 21]
+	fmt.Println(len(myMap)) // 2
+	anotherMap := map[string]string{
+		"one":   "i am value of 1",
+		"two":   "i am value of 2",
+		"three": "i am value of 3",
+		"four":  "i am value of 4",
+		"five":  "i am value of 5",
+		"six":   "i am value of 6",
+		"seven": "i am value of 7",
+	}
+	for key, val := range anotherMap {
+		fmt.Println("Key is : ", key, " Value is : ", val, " - > ")
+	}
+	// Key is :  one  Value is :  i am value of 1  - >
+	// Key is :  two  Value is :  i am value of 2  - >
+	// Key is :  three  Value is :  i am value of 3  - >
+	// Key is :  four  Value is :  i am value of 4  - >
+	// Key is :  five  Value is :  i am value of 5  - >
+	// Key is :  six  Value is :  i am value of 6  - >
+	// Key is :  seven  Value is :  i am value of 7  - >
+
+	//see when we run same code twice then the output will be different - not ordered
+
+	// Key is :  six  Value is :  i am value of 6  - >
+	// Key is :  seven  Value is :  i am value of 7  - >
+	// Key is :  one  Value is :  i am value of 1  - >
+	// Key is :  two  Value is :  i am value of 2  - >
+	// Key is :  three  Value is :  i am value of 3  - >
+	// Key is :  four  Value is :  i am value of 4  - >
+	// Key is :  five  Value is :  i am value of 5  - >
+
+	// When iterating over a map with a range loop, the iteration order is not specified
+	// and is not guaranteed to be the same from one iteration to the next.
+	// If you require a stable iteration order
+	// you must maintain a separate data structure that specifies that order.
+	myMap[34] = "I am value of key 34"
+	myMap[41] = "I am value of key 41"
+	myMap[4] = "I am value of key 4"
+	var sliceOfKeys []int
+	for k := range myMap {
+		sliceOfKeys = append(sliceOfKeys, k)
+	}
+	fmt.Println(sliceOfKeys) // [41 4 34 17 21]
+	sort.Ints(sliceOfKeys)
+
+	fmt.Println(sliceOfKeys) // [4 17 21 34 41]
+
+	for _, ki := range sliceOfKeys {
+		fmt.Println("key: ", ki, " Value: ", myMap[ki])
+	}
+	// key:  4  Value:  I am value of key 4
+	// key:  17  Value:  I am value of key 17
+	// key:  21  Value:  I am value of key 21
+	// key:  34  Value:  I am value of key 34
+	// key:  41  Value:  I am value of key 41
+
+}
+```
+#### OUTPUT
+```shell
+map[]
+map[]
+map[]
+map[16:I am value of key 16]
+map[16:I am value of key 16 17:I am value of key 17]
+map[16:I am value of key 16 17:I am value of key 17 21:I am value of key 21]
+I am value of key 17
+ -> false
+map[17:I am value of key 17 21:I am value of key 21]
+2
+Key is :  two  Value is :  i am value of 2  - >
+Key is :  three  Value is :  i am value of 3  - >
+Key is :  four  Value is :  i am value of 4  - >
+Key is :  five  Value is :  i am value of 5  - >
+Key is :  six  Value is :  i am value of 6  - >
+Key is :  seven  Value is :  i am value of 7  - >
+Key is :  one  Value is :  i am value of 1  - >
+[41 4 34 17 21]
+[4 17 21 34 41]
+key:  4  Value:  I am value of key 4
+key:  17  Value:  I am value of key 17
+key:  21  Value:  I am value of key 21
+key:  34  Value:  I am value of key 34
+key:  41  Value:  I am value of key 41
+```
 </details>
