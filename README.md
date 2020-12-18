@@ -975,8 +975,9 @@ package main
 import "fmt"
 
 type Stack []interface{}
-
+//type Stack []string
 func (s *Stack) Push(item interface{}) {
+// func (s *Stack) Push(item string) {
 	*s = append(*s, item)
 }
 func (s *Stack) Pop() bool {
