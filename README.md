@@ -1081,10 +1081,159 @@ func main() {
 []
 []
 ```
+### Doubly Linked List
+```go
+// In simple words, we can say, linked list is a collection of nodes. Node consists of two parts:
+// Data
+// Pointers- next previous
+package main
 
+import "fmt"
 
+type Node struct {
+	data interface{}
+	next *Node
+	prev *Node
+}
+type LinkedList struct {
+	head *Node
+	tail *Node
+	size int
+}
 
+func (l *LinkedList) show() {
+	list := l.head
+	for list != nil {
+		//fmt.Println(list.data)
+		fmt.Printf("%v -> ", list.data)
+		list = list.next
+	}
+	fmt.Println("-------------$$$$$$$$$$$$----------------")
+}
+func (l *LinkedList) insertAt(item interface{}, index int) {
+	// IF YOU WANT EXPLANATION THEN PLEASE GO TO -
+	// https://github.com/rupamgangulydev/DataStructures_and_Algorithms/blob/master/ADS_004_DoublyLinkedList/DoublyLinkedList.java
+	node := &Node{
+		data: item,
+	}
+	if index == 0 {
 
+		if l.head != nil {
+			node.next = l.head
+			l.head.prev = node
+		}
+		l.head = node
+	} else {
+		n := l.head
+		for i := 0; i < index-1; i++ {
+			n = n.next
+		}
+		if n.next != nil {
+			node.next = n.next
+			n.next.prev = node
+		}
+		node.prev = n
+		n.next = node
+	}
+	l.size++
+}
+func (l *LinkedList) deleteAt(index int) {
+	if index < l.size {
+		if index == 0 {
+			if l.size == 1 {
+				l.head = nil
+				l.size--
+			} else {
+				l.head = l.head.next
+				l.head.prev = nil
+				l.size--
+			}
+		} else {
+			n := l.head
+			for i := 0; i < index-1; i++ {
+				n = n.next
+			}
+			temp := n.next
+			if temp.next != nil {
+				n.next = temp.next
+				temp.next.prev = n
+				l.size--
+			} else {
+				n.next = nil
+				l.size--
+			}
+		}
+	}
+}
+func main() {
+	var list LinkedList
+	fmt.Println("12 Insert at 0 ")
+	list.insertAt(12, 0)
+	list.show()
+	fmt.Println("13 Insert at 0 ")
+	list.insertAt(13, 0)
+	list.show()
+	fmt.Println("15 Insert at 0 ")
+	list.insertAt(15, 0)
+	list.show()
+	fmt.Println("rupam Insert at 0 ")
+	list.insertAt("rupam", 0)
+	list.show()
+	fmt.Println("11 Insert at 0 ")
+	list.insertAt(11, 0)
+	list.show()
+	fmt.Println("17 Insert at 3 ")
+	list.insertAt(17, 3)
+	list.show()
+	fmt.Println("100 Insert at 6 ")
+	list.insertAt(100, 6)
+	list.show()
+	fmt.Println("45 Insert at 1 ")
+	list.insertAt(45, 1)
+	list.show()
+	fmt.Println("delete at 0 ")
+	list.deleteAt(0)
+	list.show()
+	fmt.Println("delete at 6 ")
+	list.deleteAt(6)
+	list.show()
+	fmt.Println("delete at 3 ")
+	list.deleteAt(3)
+	list.show()
+	fmt.Println("delete at 21 ")
+	list.deleteAt(21)
+	list.show()
+
+}
+```
+#### OUTPUT
+
+```shell
+12 Insert at 0 
+12 -> -------------$$$$$$$$$$$$----------------
+13 Insert at 0
+13 -> 12 -> -------------$$$$$$$$$$$$----------------
+15 Insert at 0
+15 -> 13 -> 12 -> -------------$$$$$$$$$$$$----------------
+rupam Insert at 0
+rupam -> 15 -> 13 -> 12 -> -------------$$$$$$$$$$$$----------------
+11 Insert at 0
+11 -> rupam -> 15 -> 13 -> 12 -> -------------$$$$$$$$$$$$----------------
+17 Insert at 3
+11 -> rupam -> 15 -> 17 -> 13 -> 12 -> -------------$$$$$$$$$$$$----------------
+100 Insert at 6
+11 -> rupam -> 15 -> 17 -> 13 -> 12 -> 100 -> -------------$$$$$$$$$$$$----------------
+45 Insert at 1
+11 -> 45 -> rupam -> 15 -> 17 -> 13 -> 12 -> 100 -> -------------$$$$$$$$$$$$----------------
+delete at 0
+45 -> rupam -> 15 -> 17 -> 13 -> 12 -> 100 -> -------------$$$$$$$$$$$$----------------
+delete at 6
+45 -> rupam -> 15 -> 17 -> 13 -> 12 -> -------------$$$$$$$$$$$$----------------
+delete at 3
+45 -> rupam -> 15 -> 13 -> 12 -> -------------$$$$$$$$$$$$----------------
+delete at 21
+45 -> rupam -> 15 -> 13 -> 12 -> -------------$$$$$$$$$$$$----------------
+```
 
 
 
