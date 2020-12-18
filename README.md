@@ -9,12 +9,12 @@
 
 ## Section 2 : GO Lang Fundamentals:
 ### VARIABLE
-Here i is the name of the variable. Type of the variable is int. Inside a function, the := short assignment statement can be used in place of a var declaration with implicit type.
+Inside a function, the := short assignment statement can be used in place of a var declaration with implicit type.
 
 ~~var int i  // syntax error~~
 ```go
 var i int // // SYNTAX IS CORRECT
-
+//Here i is the name of the variable. Type of the variable is int. 
 
 package main
 
