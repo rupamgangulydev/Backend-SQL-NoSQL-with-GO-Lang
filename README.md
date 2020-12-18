@@ -980,9 +980,12 @@ func (s *Stack) Push(item interface{}) {
 	*s = append(*s, item)
 }
 func (s *Stack) Pop() bool {
+if len(*s) !=0{
 	index := len(*s) - 1
 	*s = (*s)[:index]
 	return true
+	}
+	return false
 }
 func main() {
 	var st Stack
