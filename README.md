@@ -1006,7 +1006,12 @@ func main() {
 	fmt.Println(st)
 	st.Pop()
 	fmt.Println(st)
+	st.Pop()
+	fmt.Println(st)
+	st.Pop()
+	fmt.Println(st)
 }
+
 ```
 #### OUTPUT
 ```shell
@@ -1014,6 +1019,10 @@ func main() {
 [one two three four 34]
 [one two three four]
 [one two three]
+[one two]
+[one]
+[]
+[]
 ```
 | Store String |  Store Any Type | 
 | :---:   | :-: |
