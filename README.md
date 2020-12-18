@@ -980,10 +980,10 @@ func (s *Stack) Push(item interface{}) {
 	*s = append(*s, item)
 }
 func (s *Stack) Pop() bool {
-if len(*s) !=0{
-	index := len(*s) - 1
-	*s = (*s)[:index]
-	return true
+	if len(*s) != 0 {
+		index := len(*s) - 1
+		*s = (*s)[:index]
+		return true
 	}
 	return false
 }
@@ -995,6 +995,10 @@ func main() {
 	st.Push("four")
 	st.Push(34)
 	st.Push(123.567)
+	fmt.Println(st)
+	st.Pop()
+	fmt.Println(st)
+	st.Pop()
 	fmt.Println(st)
 	st.Pop()
 	fmt.Println(st)
@@ -1015,7 +1019,58 @@ func main() {
 | :---:   | :-: |
 | <img src="/ASSETS/stackgo1.PNG"> | <img src="/ASSETS/stackgo2.PNG"> | 
 
+### QUEUE
 
+Queue follows a FIFO (First-In-First-Out) structure, the dequeue and enqueue operations can be performed as follows:
+Use the built-in append function to enqueue.
+Slice off the first element to dequeue.
+
+```go
+package main
+
+import "fmt"
+
+type Queue []interface{}
+
+func (q *Queue) push(item interface{}) {
+	*q = append(*q, item)
+}
+func (q *Queue) pop() {
+	if len(*q) != 0 {
+		*q = (*q)[1:]
+	}
+}
+func main() {
+	var qu Queue
+	qu.push("hi")
+	qu.push(12)
+	qu.push(34.678)
+	qu.push(true)
+	fmt.Println(qu)
+	qu.pop()
+	fmt.Println(qu)
+	qu.pop()
+	fmt.Println(qu)
+	qu.pop()
+	fmt.Println(qu)
+	qu.pop()
+	fmt.Println(qu)
+	qu.pop()
+	fmt.Println(qu)
+	qu.pop()
+	fmt.Println(qu)
+}
+```
+#### OUTPUT
+```shell
+[hi 12 34.678 true]
+[12 34.678 true]
+[34.678 true]
+[true]
+[]
+[]
+[]
+```
 
 
 
