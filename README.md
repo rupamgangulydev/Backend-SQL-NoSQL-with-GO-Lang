@@ -799,4 +799,56 @@ key:  21  Value:  I am value of key 21
 key:  34  Value:  I am value of key 34
 key:  41  Value:  I am value of key 41
 ```
+
+
+
 </details>
+
+## Section 3 : Data STructure and Algorithm:
+
+### STACK
+```go
+// A stack is an ordered data structure that follows the Last-In-First-Out (LIFO) principle.
+//  Stacks are most easily implemented in Golang using slices:
+
+// An element is pushed to the stack with the built-in append function.
+// The element is popped from the stack by slicing off the top element.
+
+package main
+
+import "fmt"
+
+type Stack []interface{}
+
+func (s *Stack) Push(item interface{}) {
+	*s = append(*s, item)
+}
+func (s *Stack) Pop() bool {
+	index := len(*s) - 1
+	*s = (*s)[:index]
+	return true
+}
+func main() {
+	var st Stack
+	st.Push("one")
+	st.Push("two")
+	st.Push("three")
+	st.Push("four")
+	st.Push(34)
+	st.Push(123.567)
+	fmt.Println(st)
+	st.Pop()
+	fmt.Println(st)
+	st.Pop()
+	fmt.Println(st)
+	st.Pop()
+	fmt.Println(st)
+}
+```
+#### OUTPUT
+```shell
+[one two three four 34 123.567]
+[one two three four 34]
+[one two three four]
+[one two three]
+```
