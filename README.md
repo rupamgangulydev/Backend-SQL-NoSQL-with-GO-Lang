@@ -852,3 +852,6 @@ func main() {
 [one two three four]
 [one two three]
 ```
+| Store String |  Store Any Type | 
+| :---:   | :-: |
+| <img src="/ASSETS/stackgo1.PNG"> | <img src="/ASSETS/stackgo2.PNG"> | 
