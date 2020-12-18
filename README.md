@@ -867,17 +867,17 @@ func (s *Stack) pointerPush0() {
 func (s *Stack) pointerPush1() { // invalid receiver type *Stack (Stack is an interface type)
 	fmt.Println("pointerPush1")
 	*s = append(*s, "ten")
-	fmt.Println(s) // &[four]
+	fmt.Println(s) // &[four five six seven eight nine ten]
 	*s = append(*s, "eleven")
-	fmt.Println(s) // &[four five]
+	fmt.Println(s) // &[four five six seven eight nine ten eleven]
 	*s = append(*s, "twelve")
-	fmt.Println(s) // &[four five six]
+	fmt.Println(s) // &[four five six seven eight nine ten eleven twelve]
 	*s = append(*s, "thirteen")
-	fmt.Println(s) //&[four five six seven]
+	fmt.Println(s) // &[four five six seven eight nine ten eleven twelve thirteen]
 	*s = append(*s, "fourteen")
-	fmt.Println(s) // &[four five six seven eight]
+	fmt.Println(s) // &[four five six seven eight nine ten eleven twelve thirteen fourteen]
 	*s = append(*s, "fifteen")
-	fmt.Println(s) //&[four five six seven eight nine]
+	fmt.Println(s) // &[four five six seven eight nine ten eleven twelve thirteen fourteen fifteen]
 }
 func main() {
 	fmt.Println("index is : ", index) // index is :  0
@@ -921,6 +921,7 @@ func main() {
 	// &[four five six seven eight nine ten eleven twelve thirteen fourteen fifteen]
 	fmt.Println()
 }
+
 ```
 #### OUTPUT
 ```shell
