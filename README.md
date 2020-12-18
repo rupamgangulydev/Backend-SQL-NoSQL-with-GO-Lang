@@ -805,6 +805,10 @@ key:  41  Value:  I am value of key 41
 </details>
 
 ## Section 3 : Data STructure and Algorithm:
+
+<details>
+	<summary> Click here for expanding Data STructure and Algorithm</summary>
+	
 ### Why use Pointer in code-:
 ```go
 package main
@@ -1007,3 +1011,15 @@ func main() {
 | Store String |  Store Any Type | 
 | :---:   | :-: |
 | <img src="/ASSETS/stackgo1.PNG"> | <img src="/ASSETS/stackgo2.PNG"> | 
+
+
+
+
+
+
+
+
+
+
+
+</details>
