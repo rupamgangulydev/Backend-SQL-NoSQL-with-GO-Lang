@@ -815,7 +815,7 @@ package main
 
 import "fmt"
 
-type Stack []interface{}
+type Stack []string
 
 var index int
 
