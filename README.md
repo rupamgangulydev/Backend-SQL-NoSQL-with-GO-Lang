@@ -179,11 +179,11 @@ func main() {
 	d is :  0xc000012090
 ```
 
-#### Go lang tries to distance itself from object-oriented terminology, at the same time it can give you all object-oriented programming flavors and benefits.
-####  For instance,
-#### C++ or Java classes are called a struct,
-#### A class methods are called receivers.
-#### Inheritance is called embedding
+ Go lang tries to distance itself from object-oriented terminology, at the same time it can give you all object-oriented programming flavors and benefits.
+ For instance,
+ C++ or Java classes are called a struct,
+ A class methods are called receivers.
+ Inheritance is called embedding
 ### STRUCT
 ```go
 package main
