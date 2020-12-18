@@ -843,11 +843,11 @@ func (s Stack) abnormalPush0() {
 func (s Stack) abnormalPush1() {
 	fmt.Println("I am abnormalPush1")
 	s = append(s, "zero")
-	fmt.Println(s) //[one]
+	fmt.Println(s) // [zero]
 	s = append(s, "minus one")
-	fmt.Println(s) //[one two]
+	fmt.Println(s) // [zero minus one]
 	s = append(s, "minus two")
-	fmt.Println(s) //[one two three]
+	fmt.Println(s) // [zero minus one minus two]
 }
 func (s *Stack) pointerPush0() {
 	fmt.Println("pointerPush0")
@@ -921,6 +921,7 @@ func main() {
 	// &[four five six seven eight nine ten eleven twelve thirteen fourteen fifteen]
 	fmt.Println()
 }
+
 
 ```
 #### OUTPUT
