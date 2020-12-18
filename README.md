@@ -805,7 +805,157 @@ key:  41  Value:  I am value of key 41
 </details>
 
 ## Section 3 : Data STructure and Algorithm:
+### Why use Pointer in code-:
+```go
+package main
 
+import "fmt"
+
+type Stack []interface{}
+
+var index int
+
+func push() {
+	index = 3
+	fmt.Println("I am Push function")
+}
+func newPush() {
+	index = 1234
+	fmt.Println("I am newPush")
+}
+func normalPush0() {
+	index = 9
+	fmt.Println("I am normalPush0")
+}
+func (Stack) normalPush1() {
+	fmt.Println("I am normalPush1")
+
+}
+func (s Stack) abnormalPush0() {
+	fmt.Println("I am abnormalPush0")
+	s = append(s, "one")
+	fmt.Println(s) //[one]
+	s = append(s, "two")
+	fmt.Println(s) //[one two]
+	s = append(s, "three")
+	fmt.Println(s) //[one two three]
+}
+func (s Stack) abnormalPush1() {
+	fmt.Println("I am abnormalPush1")
+	s = append(s, "zero")
+	fmt.Println(s) //[one]
+	s = append(s, "minus one")
+	fmt.Println(s) //[one two]
+	s = append(s, "minus two")
+	fmt.Println(s) //[one two three]
+}
+func (s *Stack) pointerPush0() {
+	fmt.Println("pointerPush0")
+	*s = append(*s, "four")
+	fmt.Println(s) // &[four]
+	*s = append(*s, "five")
+	fmt.Println(s) // &[four five]
+	*s = append(*s, "six")
+	fmt.Println(s) // &[four five six]
+	*s = append(*s, "seven")
+	fmt.Println(s) //&[four five six seven]
+	*s = append(*s, "eight")
+	fmt.Println(s) // &[four five six seven eight]
+	*s = append(*s, "nine")
+	fmt.Println(s) //&[four five six seven eight nine]
+}
+func (s *Stack) pointerPush1() { // invalid receiver type *Stack (Stack is an interface type)
+	fmt.Println("pointerPush1")
+	*s = append(*s, "ten")
+	fmt.Println(s) // &[four]
+	*s = append(*s, "eleven")
+	fmt.Println(s) // &[four five]
+	*s = append(*s, "twelve")
+	fmt.Println(s) // &[four five six]
+	*s = append(*s, "thirteen")
+	fmt.Println(s) //&[four five six seven]
+	*s = append(*s, "fourteen")
+	fmt.Println(s) // &[four five six seven eight]
+	*s = append(*s, "fifteen")
+	fmt.Println(s) //&[four five six seven eight nine]
+}
+func main() {
+	fmt.Println("index is : ", index) // index is :  0
+	push()
+	fmt.Println("index is : ", index) // index is :  3
+	newPush()
+	fmt.Println("index is : ", index) // index is :  1234
+	normalPush0()
+	fmt.Println("index is : ", index) // index is :  9
+	index = 80009
+	fmt.Println("index is : ", index) // index is :  80009
+	// According to this index is global variable
+	var st Stack
+	//normalPush1() // undefined: normalPush1
+	st.normalPush1() // I am normalPush1
+	st.abnormalPush0()
+	// I am abnormalPush0
+	// [one]
+	// [one two]
+	// [one two three]
+	st.abnormalPush1()
+	// I am abnormalPush1
+	// [zero]
+	// [zero minus one]
+	// [zero minus one minus two]
+	st.pointerPush0()
+	// pointerPush0
+	// &[four]
+	// &[four five]
+	// &[four five six]
+	// &[four five six seven]
+	// &[four five six seven eight]
+	// &[four five six seven eight nine]
+	st.pointerPush1()
+	// pointerPush1
+	// &[four five six seven eight nine ten]
+	// &[four five six seven eight nine ten eleven]
+	// &[four five six seven eight nine ten eleven twelve]
+	// &[four five six seven eight nine ten eleven twelve thirteen]
+	// &[four five six seven eight nine ten eleven twelve thirteen fourteen]
+	// &[four five six seven eight nine ten eleven twelve thirteen fourteen fifteen]
+	fmt.Println()
+}
+```
+#### OUTPUT
+```shell
+index is :  0
+I am Push function
+index is :  3     
+I am newPush      
+index is :  1234
+I am normalPush0
+index is :  9
+index is :  80009
+I am normalPush1
+I am abnormalPush0
+[one]
+[one two]
+[one two three]
+I am abnormalPush1
+[zero]
+[zero minus one]
+[zero minus one minus two]
+pointerPush0
+&[four]
+&[four five]
+&[four five six]
+&[four five six seven]
+&[four five six seven eight]
+&[four five six seven eight nine]
+pointerPush1
+&[four five six seven eight nine ten]
+&[four five six seven eight nine ten eleven]
+&[four five six seven eight nine ten eleven twelve]
+&[four five six seven eight nine ten eleven twelve thirteen]
+&[four five six seven eight nine ten eleven twelve thirteen fourteen]
+&[four five six seven eight nine ten eleven twelve thirteen fourteen fifteen]
+```
 ### STACK
 ```go
 // A stack is an ordered data structure that follows the Last-In-First-Out (LIFO) principle.
