@@ -800,14 +800,6 @@ key:  34  Value:  I am value of key 34
 key:  41  Value:  I am value of key 41
 ```
 
-
-
-</details>
-
-## Section 3 : Some Data Structures and Algorithms Concepts:
-
-<details>
-	<summary> Click here for expanding Data STructure and Algorithm</summary>
 	
 ### Why use Pointer in code-:
 ```go
@@ -1090,6 +1082,8 @@ func main() {
 ```
 ### Doubly Linked List
 
+#### IF YOU WANT EXPLANATION THEN PLEASE GO TO -
+##### https://github.com/rupamgangulydev/DataStructures_and_Algorithms/blob/master/ADS_004_DoublyLinkedList/DoublyLinkedList.java
 
 ```go
 // In simple words, we can say, linked list is a collection of nodes. Node consists of two parts:
@@ -1119,8 +1113,7 @@ func (l *LinkedList) show() {
 	fmt.Println("-------------$$$$$$$$$$$$----------------")
 }
 func (l *LinkedList) insertAt(item interface{}, index int) {
-	// IF YOU WANT EXPLANATION THEN PLEASE GO TO -
-	// https://github.com/rupamgangulydev/DataStructures_and_Algorithms/blob/master/ADS_004_DoublyLinkedList/DoublyLinkedList.java
+	
 	node := &Node{
 		data: item,
 	}
@@ -1245,6 +1238,5 @@ delete at 21
 
 
 
-
-
 </details>
+
