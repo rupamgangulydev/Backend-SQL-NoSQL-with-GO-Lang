@@ -804,7 +804,7 @@ key:  41  Value:  I am value of key 41
 
 </details>
 
-## Section 3 : Data STructure and Algorithm:
+## Section 3 : Some Data Structures and Algorithms Concepts:
 
 <details>
 	<summary> Click here for expanding Data STructure and Algorithm</summary>
@@ -898,16 +898,21 @@ func main() {
 	//normalPush1() // undefined: normalPush1
 	st.normalPush1() // I am normalPush1
 	st.abnormalPush0()
+	
 	// I am abnormalPush0
 	// [one]
 	// [one two]
 	// [one two three]
+	
 	st.abnormalPush1()
+	
 	// I am abnormalPush1
 	// [zero]
 	// [zero minus one]
 	// [zero minus one minus two]
+	
 	st.pointerPush0()
+	
 	// pointerPush0
 	// &[four]
 	// &[four five]
@@ -915,7 +920,9 @@ func main() {
 	// &[four five six seven]
 	// &[four five six seven eight]
 	// &[four five six seven eight nine]
+	
 	st.pointerPush1()
+	
 	// pointerPush1
 	// &[four five six seven eight nine ten]
 	// &[four five six seven eight nine ten eleven]
