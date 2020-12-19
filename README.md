@@ -1084,6 +1084,42 @@ func main() {
 
 #### IF YOU WANT EXPLANATION THEN PLEASE GO TO MY DataStructures_and_Algorithms REPOSITORY, through this link :- 
 ##### https://github.com/rupamgangulydev/DataStructures_and_Algorithms/blob/master/ADS_004_DoublyLinkedList/DoublyLinkedList.java
+ ### There you will get  
+ 
+ | ADS_000_DynamicArray    |
+ADS_001_Stack   |
+ADS_002_Queue   |
+ADS_003_CircularQueue   |
+ADS_004_DoublyLinkedList    |
+ADS_005_BinarySearchTree    |
+ADS_006_Heap    |
+ADS_007_HashTable   |
+ADS_008_HashMap |
+ADS_009_SegmentTree |
+ADS_010_Graphs  |
+ADS_011_PythonicListImplementation  |
+DP_000_0-1Knapsack  |
+DP_001_SubsetSumANDEqualSumPartition    |
+DP_002_CountSubsetSumORTargetSum    |
+DP_003_MinimumSubsetSumDifference   |
+DP_004_UnboundedKnapsac |
+DP_005_CoinChange2  |
+DP_006_LongestCommonSubSequence |
+DP_007_PrintLongestSubsequence  |
+DP_008_ShortestSuperSequence    |
+DP_009_-MinNoOfInsDeltoConvertStrtoStr  |
+DP_010_-PrintingShortestSuperseq    |
+DP_011_PalindromeString |
+DP_012_MinNofInserDeltoMekPal   |
+DP_013_MatrixChainMultiplication    |
+DP_014_BrustBallons |
+DP_015_CutsInStic   |
+DP_016_PalindromePartition  |
+DP_017_-BooleanExpressionTrue   |
+DP_018_ScrambleString   |
+DP_019_EggDroping   |
+DP_020_MaxPathSumofBTree    |
+ 
 
 ```go
 // In simple words, we can say, linked list is a collection of nodes. Node consists of two parts:
