@@ -1583,7 +1583,7 @@ var client *mongo.Client // Client is a handle representing a pool of connection
 // The Client type opens and closes connections automatically and maintains a pool of idle connections.
 // For connection pool configuration options, see documentation for the ClientOptions type in the mongo/options package.
 var err error
-var ctx, _ = context.WithTimeout(context.Background(), 60*time.Second)
+var ctx, _ = context.WithTimeout(context.Background(), 1560*time.Second)
 
 func main() {
 
