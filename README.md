@@ -1407,6 +1407,8 @@ The opts parameter can be used to specify options for this operation
 
 #### GORILA/MUX
 
+Vars returns the route variables for the current request, if any.
+
 48. MiddlewareFunc  -> is a function which receives an http.Handler and returns another http.Handler. Typically, the returned handler is a closure which does something with the http.ResponseWriter and http.Request passed to it, and then calls the handler passed as parameter to the MiddlewareFunc.
 
 49. Route  -> stores information to match a request and build URLs.
