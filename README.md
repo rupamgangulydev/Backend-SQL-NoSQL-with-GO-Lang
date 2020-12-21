@@ -1273,9 +1273,107 @@ delete at 21
 ```
 
 
-
 </details>
-### Section 3 : BACKEND REST API
+
+
+
+###  Section 3 : BACKEND REST API USING GO LANGUAGE: 
+
+#### MonGo driver:-
+
+1. Client is a handle representing a pool of connections to a MongoDB deployment. It is safe for concurrent use by multiple goroutines.
+The Client type opens and closes connections automatically and maintains a pool of idle connections. For connection pool configuration options, see documentation for the ClientOptions type in the mongo/options package.
+
+2. Connect creates a new Client and then initializes it using the Connect method. This is equivalent to calling NewClient followed by Client.Connect.
+
+3. NewClient creates a new client to connect to a deployment specified by the uri.
+
+4. (*Client) Connect initializes the Client by starting background monitoring goroutines. If the Client was created using the NewClient function, this method must be called before a Client can be used.
+Connect starts background goroutines to monitor the state of the deployment and does not do any I/O in the main goroutine. The Client.Ping method can be used to verify that the connection was created successfully.
+
+5. (*Client) Database returns a handle for a database with the given name configured with the given DatabaseOptions
+
+6.  (*Client) Disconnect closes sockets to the topology referenced by this Client. It will shut down any monitoring goroutines, close the idle connection pool, and will wait until all the in use connections have been returned to the connection pool and closed before returning. If the context expires via cancellation, deadline, or timeout before the in use connections have returned, the in use connections will be closed, resulting in the failure of any in flight read or write operations. If this method returns with no errors, all connections associated with this Client have been closed.
+ 
+7. (*Client) ListDatabaseNames executes a listDatabases command and returns a slice containing the names of all of the databases on the server.
+The filter parameter must be a document containing query operators and can be used to select which databases are included in the result. It cannot be nil. An empty document (e.g. bson.D{}) should be used to include all databases.
+
+8. (*Client)ListDatabases executes a listDatabases command and returns the result.
+The filter parameter must be a document containing query operators and can be used to select which databases are included in the result. It cannot be nil. An empty document (e.g. bson.D{}) should be used to include all databases.
+
+9. (*Client) NumberSessionsInProgress returns the number of sessions that have been started for this client but have not been closed (i.e. EndSession has not been called).
+
+10. (*Client) StartSession starts a new session configured with the given options.
+If the DefaultReadConcern, DefaultWriteConcern, or DefaultReadPreference options are not set, the client's read concern, write concern, or read preference will be used, respectively.
+
+11. (*Client) UseSession creates a new Session and uses it to create a new SessionContext, which is used to call the fn callback. The SessionContext parameter must be used as the Context parameter for any operations in the fn callback that should be executed under a session. After the callback returns, the created Session is ended, meaning that any in-progress transactions started by fn will be aborted even if fn returns an error.
+If the ctx parameter already contains a Session, that Session will be replaced with the newly created one.
+Any error returned by the fn callback will be returned without any modifications.
+UseSessionWithOptions operates like UseSession but uses the given SessionOptions to create the Session.
+
+12. ClientEncryption is used to create data keys and explicitly encrypt and decrypt BSON values.
+
+13. NewClientEncryption creates a new ClientEncryption instance configured with the given options.
+
+14.  (*ClientEncryption) Close cleans up any resources associated with the ClientEncryption instance. This includes disconnecting the key-vault Client instance.
+
+15. (*ClientEncryption) CreateDataKey creates a new key document and inserts it into the key vault collection. Returns the _id of the created document.
+
+16. (*ClientEncryption) Decrypt/Encrypt decrypts an encrypted value (BSON binary of subtype 6) and returns the original BSON value.
+Encrypt encrypts a BSON value with the given key and algorithm. Returns an encrypted value (BSON binary of subtype 6).
+
+17. Collection is a handle to a MongoDB collection. It is safe for concurrent use by multiple goroutines.
+
+18. (*Collection) Clone creates a copy of the Collection configured with the given CollectionOptions. The specified options are merged with the existing options on the collection, with the specified options taking precedence.
+
+19.  (*Collection) CountDocuments returns the number of documents in the collection. For a fast count of the documents in the collection, see the EstimatedDocumentCount method.
+The filter parameter must be a document and can be used to select which documents contribute to the count. It cannot be nil. An empty document (e.g. bson.D{}) should be used to count all documents in the collection. This will result in a full collection scan.
+The opts parameter can be used to specify options for the operation
+
+20. (*Collection) Database returns the Database that was used to create the Collection.
+
+21. (*Collection) DeleteMany/DeleteOne executes a delete command to delete documents from the collection.
+DeleteOne executes a delete command to delete at most one document from the collection.
+
+22. (*Collection) Distinct executes a distinct command to find the unique values for a specified field in the collection.
+
+23. (*Collection) Drop drops the collection on the server. This method ignores "namespace not found" errors so it is safe to drop a collection that does not exist on the server.
+
+24. (*Collection) Find/FindOne/FindOneAndDelete/FindOneAndReplace/FindOneAndUpdate executes a find command and returns a Cursor over the matching documents in the collection.
+FindOne executes a find command and returns a SingleResult for one document in the collection.
+FindOneAndDelete executes a findAndModify command to delete at most one document in the collection. and returns the document as it appeared before deletion.
+FindOneAndReplace executes a findAndModify command to replace at most one document in the collection and returns the document as it appeared before replacement.
+FindOneAndUpdate executes a findAndModify command to update at most one document in the collection and returns the document as it appeared before updating.
+
+25. (*Collection) Indexes returns an IndexView instance that can be used to perform operations on the indexes for the collection.
+
+26. (*Collection) InsertMany executes an insert command to insert multiple documents into the collection. If write errors occur during the operation (e.g. duplicate key error), this method returns a BulkWriteException error.
+InsertOne executes an insert command to insert a single document into the collection.
+
+27. (*Collection) Name returns the name of the collection.
+
+28. (*Collection) ReplaceOne executes an update command to replace at most one document in the collection.
+
+29. (*Collection) UpdateByID executes an update command to update the document whose _id value matches the provided ID in the collection. This is equivalent to running UpdateOne(ctx, bson.D{{"_id", id}}, update, opts...).
+UpdateMany executes an update command to update documents in the collection.
+UpdateOne executes an update command to update at most one document in the collection.
+
+30. Cursor is used to iterate over a stream of documents. Each document can be decoded into a Go type via the Decode method or accessed as raw BSON via the Current field.
+
+31. (*Cursor) All iterates the cursor and decodes each document into results. The results parameter must be a pointer to a slice. The slice pointed to by results will be completely overwritten. This method will close the cursor after retrieving all documents. If the cursor has been iterated, any previously iterated documents will not be included in results.
+
+32. (*Cursor) Close closes this cursor. Next and TryNext must not be called after Close has been called. Close is idempotent. After the first call, any subsequent calls will not change the state.
+
+33. (*Cursor) Decode will unmarshal the current document into val and return any errors from the unmarshalling process without any modification. If val is nil or is a typed nil, an error will be returned.
+
+34. (*Cursor) ID returns the ID of this cursor, or 0 if the cursor has been closed or exhausted.
+
+35. (*Cursor) Next/TryNext gets the next document for this cursor. It returns true if there were no errors and the cursor has not been exhausted.
+Next blocks until a document is available, an error occurs, or ctx expires. If ctx expires, the error will be set to ctx.Err(). In an error case, Next will return false.
+If Next returns false, subsequent calls will also return false.
+TryNext attempts to get the next document for this cursor. It returns true if there were no errors and the next document is available. This is only recommended for use with tailable cursors as a non-blocking alternative to Next. 
+
+36. 
 
 <details>
 	<summary> Click here for expanding Package mongo provides a MongoDB Driver API for Go.</summary>
