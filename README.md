@@ -1282,7 +1282,9 @@ delete at 21
 #### MonGo And GORILA/MuX driver:-
 
 <details>
-	<summary> Click here for expanding PackageMonGo And GORILA/MuX driver.</summary>
+	<summary> Click here for expanding- MonGo And GORILA/MuX driver 65 POINTS to KNOW.</summary>
+	
+	
 1. Client -> is a- handle representing a pool of connections to a MongoDB deployment. It is safe for concurrent use by multiple goroutines.
 The Client type opens and closes connections automatically and maintains a pool of idle connections.
 
