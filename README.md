@@ -1580,7 +1580,8 @@ func deleteBook(w http.ResponseWriter, r *http.Request) {
 //-----x------HANDELER FUNCTIONS-------x--------
 
 var client *mongo.Client // Client is a handle representing a pool of connections to a MongoDB deployment. It is safe for concurrent use by multiple goroutines.
-// The Client type opens and closes connections automatically and maintains a pool of idle connections. For connection pool configuration options, see documentation for the ClientOptions type in the mongo/options package.
+// The Client type opens and closes connections automatically and maintains a pool of idle connections.
+// For connection pool configuration options, see documentation for the ClientOptions type in the mongo/options package.
 var err error
 var ctx, _ = context.WithTimeout(context.Background(), 60*time.Second)
 
@@ -1606,15 +1607,23 @@ func main() {
 		log.Fatal(err)
 	}
 	//ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = client.Connect(ctx) // Connect initializes the Client by starting background monitoring goroutines. If the Client was created using the NewClient function, this method must be called before a Client can be used.Connect starts background goroutines to monitor the state of the deployment and does not do any I/O in the main goroutine. The Client.Ping method can be used to verify that the connection was created successfully.
+	err = client.Connect(ctx) // Connect initializes the Client by starting background monitoring goroutines. 
+	//If the Client was created using the NewClient function, this method must be called before a Client can be
+	// used.Connect starts background goroutines to monitor the state of the deployment and does not do any I/O in the main goroutine.
+	 //The Client.Ping method can be used to verify that the connection was created successfully.
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer client.Disconnect(ctx) // Disconnect closes sockets to the topology referenced by this Client. It will shut down any monitoring goroutines, close the idle connection pool, and will wait until all the in use connections have been returned to the connection pool and closed before returning. If the context expires via cancellation, deadline, or timeout before the in use connections have returned, the in use connections will be closed, resulting in the failure of any in flight read or write operations. If this method returns with no errors, all connections associated with this Client have been closed.
+	defer client.Disconnect(ctx) // Disconnect closes sockets to the topology referenced by this Client.
+	// It will shut down any monitoring goroutines, close the idle connection pool, and will wait until all the in use
+	// connections have been returned to the connection pool and closed before returning. If the context expires via cancellation, 
+	//deadline, or timeout before the in use connections have returned, the in use connections will be closed, resulting in the failure
+	// of any in flight read or write operations. If this method returns with no errors, all connections associated with this Client have been closed.
 	// ----x---mongo-atlas connection----x-------
 	// -------------GO-LOCALHOST SERVER CONNECTION----------------------
 	http.ListenAndServe(":12345", router)
 	// -------X-----GO-LOCALHOST SERVER CONNECTION---------X------------
 	fmt.Println("established.... :)")
 }
+
 ```
