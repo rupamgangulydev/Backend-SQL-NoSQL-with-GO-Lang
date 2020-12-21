@@ -1602,7 +1602,7 @@ func main() {
 	// Client is a handle representing a pool of connections to a MongoDB deployment. It is safe for concurrent use by multiple goroutines.
 	// NewClient creates a new client to connect to a deployment specified by the uri.  This includes the ApplyURI method.
 	// The Client type opens and closes connections automatically and maintains a pool of idle connections.
-	client, err = mongo.NewClient(options.Client().ApplyURI("mongodb+srv://rupam:UG8iKW0cqTRoh8q5@cluster0.cpwla.mongodb.net/booksmanagement?retryWrites=true&w=majority"))
+	client, err = mongo.NewClient(options.Client().ApplyURI("mongodb+srv://rupam:<password>@cluster0.cpwla.mongodb.net/<db-name>?retryWrites=true&w=majority"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -1627,3 +1627,5 @@ func main() {
 }
 
 ```
+<img src="ASSETS/postman-create-book.PNG">
+<img src="ASSETS/mongodb-atlas-create-book.PNG">
