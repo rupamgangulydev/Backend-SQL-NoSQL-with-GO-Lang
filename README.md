@@ -1,4 +1,5 @@
 
+<img src="/ASSETS/demo.gif">
 
 ## Section 1 : Why use GO Lang as Backend :
 
