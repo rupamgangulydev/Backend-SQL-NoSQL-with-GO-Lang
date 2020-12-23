@@ -1504,8 +1504,9 @@ func main() {
 	http.ListenAndServe("localhost:8080", router)
 }
 ```
-HTML-CSS-TEMPLATE-RENDERING:-
+### HTML-CSS-TEMPLATE-RENDERING:-
 HTML -
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -1525,12 +1526,15 @@ values will be substituted or injected by the template engine at runtime. -->
 </html>
 ```
 CSS -
+
 ```css
 body{
     color: blue;
 }
 ```
+
 Go -
+
 ```go
 package main
 
@@ -1597,7 +1601,7 @@ func main() {
 
 <img src="ASSETS\html-template-rendering.PNG">
 
-REST API CRUD:-
+### REST API CRUD:-
 ```go
 package main
 
@@ -1774,7 +1778,7 @@ func main() {
 <img src="ASSETS/postman-create-book.PNG">
 <img src="ASSETS/mongodb-atlas-create-book.PNG">
 
-Interact with Form:
+### Interact with Form:
 
 <img src="ASSETS/form-structures.PNG">
 
