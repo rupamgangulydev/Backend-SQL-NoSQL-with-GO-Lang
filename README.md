@@ -1594,6 +1594,9 @@ func main() {
 // "/home/go/src/js" +  "/"  + "kor.js".
 // we got kor.js file.
 ```
+
+<img src="ASSETS\html-template-rendering.PNG">
+
 REST API CRUD:-
 ```go
 package main
