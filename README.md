@@ -1773,3 +1773,162 @@ func main() {
 ```
 <img src="ASSETS/postman-create-book.PNG">
 <img src="ASSETS/mongodb-atlas-create-book.PNG">
+
+Interact with Form:
+
+<img src="ASSETS/form-structures.PNG">
+form.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="styles/main.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+    <h1>Log In</h1>
+    <form method="POST" action="/login">
+        <label for="ussername">Name</label>
+        <input type="text" id="uname" name="username">
+        <label for="password">Password</label>
+        <input type="password" id="pword" name="password">
+        <label for="email">Password</label>
+        <input type="email" id="eml" name="email">
+        <p>type Comment : </p>
+        <textarea name="comment"placeholder="Remember, be nice!" cols="30" rows="5"></textarea>
+        <p></p>
+        <button type="submit">LOGIN</button>
+    </form>
+</body>
+</html>
+```
+
+homepage.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>are Logged In {{.Username}}</h1> 
+    <p>
+        your comment is {{.Comment}}</p>
+</body>
+</html>
+```
+main.css
+```css
+label{
+    color: darkcyan;
+}
+button{
+    background-color: darkgreen;
+    color: floralwhite;
+    width: 200px;
+    height: 3em;
+    text-align: center;
+    display: inline;
+    font-size: medium;
+}
+textarea {
+    width: 400px;
+    height: 20em;
+	}
+```
+
+form.go
+```go
+package main
+
+import (
+	"fmt"
+	"html/template"
+	"net/http"
+	"strings"
+
+	"github.com/gorilla/mux"
+)
+
+//User ...
+type User struct { // DATA MODEL
+	Username string
+	password string
+	email    string
+	Comment  string
+}
+
+func formValidatorStringCount(user *User) bool {
+	if len(user.Username) < 3 || len(user.password) < 6 {
+		return false
+	}
+	return true
+}
+func isLetter(c rune) bool {
+	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
+}
+
+func isWord(s string) bool {
+	for _, c := range s {
+		if !isLetter(c) {
+			return false
+		}
+	}
+	return true
+}
+func isGmail(s string) bool {
+	if strings.ContainsAny(s, "@gmail.com") {
+		return true
+	}
+	return false
+}
+func readForm(res http.ResponseWriter, req *http.Request) {
+	req.ParseForm()
+	user := new(User) // user object created
+	fmt.Println("username - ", req.FormValue("username"))
+	fmt.Println("username - ", req.FormValue("comment"))
+	user.Username = req.FormValue("username")
+	user.password = req.FormValue("password")
+	user.Comment = req.FormValue("comment")
+	user.email = req.FormValue("email")
+
+	if !formValidatorStringCount(user) {
+		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
+		alert("You have to enter at least 6 characters for Password and 3 letters for Name!");
+		</script>`)
+		return
+	}
+
+	if !isWord(user.Username) {
+		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
+		alert("Expecting only letters in Name!");
+		</script>`)
+		return
+	}
+	if isGmail(user.email) {
+		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
+		alert("Expecting only valid gmail in Email!");
+		</script>`)
+		return
+	}
+	parseTemp, _ := template.ParseFiles("templates/htmls/homePage.html")
+	parseTemp.Execute(res, user)
+}
+
+func login(res http.ResponseWriter, req *http.Request) {
+	parseTemp, _ := template.ParseFiles("templates/htmls/form.html")
+	parseTemp.Execute(res, nil)
+}
+func main() {
+	router := mux.NewRouter()
+	router.HandleFunc("/", login).Methods("GET")
+	router.PathPrefix("/styles/").Handler(http.StripPrefix("/styles/", http.FileServer(http.Dir("templates/styles/"))))
+	router.HandleFunc("/login", readForm).Methods("POST")
+	http.ListenAndServe("localhost:8080", router)
+}
+```
+
