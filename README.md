@@ -1777,7 +1777,9 @@ func main() {
 Interact with Form:
 
 <img src="ASSETS/form-structures.PNG">
+
 form.html
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
