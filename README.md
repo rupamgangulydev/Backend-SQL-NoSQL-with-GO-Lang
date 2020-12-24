@@ -1278,9 +1278,9 @@ delete at 21
 
 
 
-###  Section 3 : BACKEND REST API USING GO LANGUAGE: 
+##  Section 3 : BACKEND REST API USING GO LANGUAGE: 
 
-#### MonGo And GORILA/MuX driver:-
+### MonGo And GORILA/MuX driver:-
 
 <details>
 	<summary> Click here for expanding- MonGo And GORILA/MuX driver 65 POINTS to KNOW.</summary>
@@ -1406,7 +1406,7 @@ The opts parameter can be used to specify options for this operation
 The runCommand parameter must be a document for the command to be executed. It cannot be nil. This must be an order-preserving type such as bson.D. Map types such as bson.M are not valid. If the command document contains a session ID or any transaction-specific fields, the behavior is undefined.
 The opts parameter can be used to specify options for this operation 
 
-#### GORILA/MUX
+### GORILA/MUX
 
 Vars returns the route variables for the current request, if any.
 
@@ -1454,8 +1454,18 @@ GetRoute  -> returns a route registered with the given name. This method was ren
 
 	
 </details>
+In this whole Note I try to avoid err handeling as it is so easy that you just replace '_' to err
+then you have to add this if block :
+```go
+if err != nil
+{
+ log.Printf("error is : ", err)
+ return
+}
+```
+This will print the error .
 
-Gorilla Mux demo:-
+### Gorilla Mux demo:-
 ```go
 // Go’s net/http package offers a lot of functionalities for URL routing of the HTTP
 // requests. One thing it doesn’t do very well is dynamic URL routing. Fortunately, we
