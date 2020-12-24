@@ -1454,14 +1454,17 @@ GetRoute  -> returns a route registered with the given name. This method was ren
 
 	
 </details>
+
 In this whole Note I try to avoid err handeling as it is so easy that you just replace '_' to err
 then you have to add this if block :
+
 ```go
 if err != nil
 {
  log.Printf("error is : ", err)
  return
 }
+
 ```
 This will print the error .
 
