@@ -230,7 +230,7 @@ func main() {
 		age: 12, salary: 12345, teacher: true,
 	}
 	fmt.Println(monica) // {12 12345 true}
-	// Pointer Struct
+	// Pointer Struct  -> i explained why we use pointer in code in letter section...
 	pointerRoss := &Employee{
 		firstname: "Rintu",
 		lastname:  "Ganguly",
@@ -309,20 +309,29 @@ import (
 // in order to successfully implemented an interface,
 // we need to implement all the methods declared by the interface with exact signature
 type Shape interface {
+	// just a struct or class with only some function declaration....
 	Area() float64
 	Perimeter() float64
 }
 type AnotherShape interface {
+	// just a struct or class with only some function declaration....
 	NewArea() string
 	NewPerimeter() float64
 }
 type Rect struct {
+	// this is a stuct with only some undefined variables
 	width, height float64
 }
 type Circle struct {
+	// this is a stuct with only some undefined variables
 	radius float64
 }
 
+
+// here(r Rect) says r is object of Rect class.. 
+// actually here, this is the synatax of defining a function outside of a struct
+// here we define Area function and Perimeter function of Shape Interfae inside Rect struct.. so that Rect class can implements Shape interface...
+// I know syntax is funny.. but its very powerful.. in this one line compiler do lots of work
 func (r Rect) Area() float64 {
 	fmt.Println(r.width * r.height)
 	return 7
@@ -331,6 +340,7 @@ func (r Rect) Perimeter() float64 {
 	fmt.Println(2 * (r.width + r.height))
 	return 7
 }
+// Now Circle class also try to implements Shape interface 
 func (c Circle) Perimeter() float64 {
 	fmt.Println(2 * (math.Pi * c.radius))
 	return 7
@@ -339,6 +349,8 @@ func (c Circle) Area() float64 {
 	fmt.Println(math.Pi * c.radius * 2)
 	return 7
 }
+
+// Here Rect class again implements AnotherShape interface.. so Rect class implements 2 interfaces..
 func (r Rect) NewArea() string {
 	return "Implements multiple interfaces"
 }
@@ -355,7 +367,7 @@ func main() {
 	s = Circle{10}
 	s.Perimeter() // 62.83185307179586
 
-	//whrn Area() didnt implemented by c Circle then we get error:
+	//when Area() didnt implemented by c Circle then we get error:
 	//cannot use Circle literal (type Circle) as type Shape in assignment:
 	//Circle does not implement Shape (missing Area method)
 
@@ -381,7 +393,7 @@ package main
 import "fmt"
 
 func explain(i interface{}) {
-	switch i.(type) {
+	switch i.(type) { // we pass type of i in switch, accroding to the type cases are happen
 	case string:
 		fmt.Println(" Interface has a String")
 	case int:
@@ -415,6 +427,7 @@ type ParentClass struct {
 	background string
 }
 
+// thats how we define function of ParentClass outsude class/struct....
 func (ParentClass) basFuncOne() string {
 	return "I am Base Function ONE"
 }
@@ -428,6 +441,8 @@ type ChildClass struct {
 	fontsize int
 }
 
+
+// thats how we define function of ChildClass outside class/struct
 func (c ChildClass) childFunc() string {
 	return "I am Child Function "
 }
@@ -463,7 +478,8 @@ I am Child Function
 ```
 ### Allocation
 
-Go has two allocation primitives, the built-in functions new and make. new is a built-in function that allocates memory, but unlike its namesakes in some other languages it does not initialize the memory, it only zeros it. That is, new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T. 
+Go has two allocation primitives, the built-in functions new and make. new is a built-in function that allocates memory, but unlike its namesakes in some other languages it does not initialize the memory, it only zeros it. 
+That is, new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T. 
 
 ```go
 package main
@@ -490,7 +506,7 @@ func main() {
 {0 0}
 {0 0}
 ```
-The built-in function make(T, args) serves a purpose different from new(T). It creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T). The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. Example of make function is present in Sliice section...
+The built-in function make(T, args) serves a purpose different from new(T). It creates slices, maps, and channels only, and it returns an initialized (not zeroed) value of type T (not *T). The reason for the distinction is that these three types represent, under the covers, references to data structures that must be initialized before use. Example of make function is present in Slice section...
 
 ### Array
 
@@ -1455,7 +1471,7 @@ GetRoute  -> returns a route registered with the given name. This method was ren
 	
 </details>
 
-In this whole Note I try to avoid err handeling as it is so easy that you just replace '_' to err
+In this whole Note I try to avoid error handeling as it is so easy that you just replace '_' to err
 then you have to add this if block :
 
 ```go
@@ -1612,7 +1628,236 @@ func main() {
 // we got kor.js file.
 ```
 
+
 <img src="ASSETS\html-template-rendering.PNG">
+
+### Interact with Form:
+
+<img src="ASSETS/form-structures.PNG">
+
+form.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="styles/main.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+    <h1>Log In</h1>
+    <form method="POST" action="/login">
+        <label for="ussername">Name</label>
+        <input type="text" id="uname" name="username">
+        <label for="password">Password</label>
+        <input type="password" id="pword" name="password">
+        <label for="email">Password</label>
+        <input type="email" id="eml" name="email">
+        <p>type Comment : </p>
+        <textarea name="comment"placeholder="Remember, be nice!" cols="30" rows="5"></textarea>
+        <p></p>
+        <button type="submit">LOGIN</button>
+    </form>
+</body>
+</html>
+```
+
+homepage.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>are Logged In {{.Username}}</h1> 
+    <p>
+        your comment is {{.Comment}}</p>
+</body>
+</html>
+```
+main.css
+
+```css
+label{
+    color: darkcyan;
+}
+button{
+    background-color: darkgreen;
+    color: floralwhite;
+    width: 200px;
+    height: 3em;
+    text-align: center;
+    display: inline;
+    font-size: medium;
+}
+textarea {
+    width: 400px;
+    height: 20em;
+	}
+```
+
+form.go
+
+```go
+package main
+
+import (
+	"fmt"
+	"html/template"
+	"net/http"
+	"strings"
+
+	"github.com/gorilla/mux"
+)
+
+//User ...
+type User struct { // DATA MODEL
+	Username string
+	password string
+	email    string
+	Comment  string
+}
+
+func formValidatorStringCount(user *User) bool {
+	if len(user.Username) < 3 || len(user.password) < 6 {
+		return false
+	}
+	return true
+}
+func isLetter(c rune) bool {
+	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
+}
+
+func isWord(s string) bool {
+	for _, c := range s {
+		if !isLetter(c) {
+			return false
+		}
+	}
+	return true
+}
+func isGmail(s string) bool {
+	if strings.ContainsAny(s, "@gmail.com") {
+		return true
+	}
+	return false
+}
+func readForm(res http.ResponseWriter, req *http.Request) {
+	req.ParseForm()
+	user := new(User) // user object created
+	fmt.Println("username - ", req.FormValue("username"))
+	fmt.Println("username - ", req.FormValue("comment"))
+	user.Username = req.FormValue("username")
+	user.password = req.FormValue("password")
+	user.Comment = req.FormValue("comment")
+	user.email = req.FormValue("email")
+
+	if !formValidatorStringCount(user) {
+		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
+		alert("You have to enter at least 6 characters for Password and 3 letters for Name!");
+		</script>`)
+		return
+	}
+
+	if !isWord(user.Username) {
+		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
+		alert("Expecting only letters in Name!");
+		</script>`)
+		return
+	}
+	if isGmail(user.email) {
+		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
+		alert("Expecting only valid gmail in Email!");
+		</script>`)
+		return
+	}
+	parseTemp, _ := template.ParseFiles("templates/htmls/homePage.html")
+	parseTemp.Execute(res, user)
+}
+
+func login(res http.ResponseWriter, req *http.Request) {
+	parseTemp, _ := template.ParseFiles("templates/htmls/form.html")
+	parseTemp.Execute(res, nil)
+}
+func main() {
+	router := mux.NewRouter()
+	router.HandleFunc("/", login).Methods("GET")
+	router.PathPrefix("/styles/").Handler(http.StripPrefix("/styles/", http.FileServer(http.Dir("templates/styles/"))))
+	router.HandleFunc("/login", readForm).Methods("POST")
+	http.ListenAndServe("localhost:8080", router)
+}
+```
+
+### File Upload
+
+index.html
+
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="fileuploader">
+        <input type="submit" name="submit" value="Submit">
+    </form>
+
+</body>
+</html>
+
+```
+fileupload.go
+
+```go
+package main
+
+import (
+	"fmt"
+	"html/template"
+	"io"
+	"net/http"
+	"os"
+
+	"github.com/gorilla/mux"
+)
+
+func fileUploader(res http.ResponseWriter, req *http.Request) {
+	file, header, _ := req.FormFile("fileuploader") // Here we call the FormFile handler on the
+	// HTTP request to get the file for the provided form key.
+	defer file.Close() // The defer statement closes the file once we return from the function.
+
+	out, _ := os.Create(header.Filename) // Here we are creating a file
+	//  inside the same directory with mode 666, which means the client can read
+	// and write but cannot execute the file.
+	defer out.Close()
+	io.Copy(out, file) //  Here we copy content from the file we received to the file we created inside the same directory.
+	fmt.Fprintf(res, "file uploaded successfully "+header.Filename)
+
+}
+func index(res http.ResponseWriter, req *http.Request) {
+	parseTemp, _ := template.ParseFiles("templates/index.html")
+	parseTemp.Execute(res, nil)
+}
+func main() {
+	router := mux.NewRouter()
+	router.HandleFunc("/", index).Methods("GET")
+	router.HandleFunc("/upload", fileUploader).Methods("POST")
+	http.ListenAndServe("localhost:8080", router)
+}
+
+```
+
 
 ### REST API CRUD:-
 ```go
@@ -1790,164 +2035,4 @@ func main() {
 ```
 <img src="ASSETS/postman-create-book.PNG">
 <img src="ASSETS/mongodb-atlas-create-book.PNG">
-
-### Interact with Form:
-
-<img src="ASSETS/form-structures.PNG">
-
-form.html
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="styles/main.css" type="text/css" rel="stylesheet"/>
-</head>
-<body>
-    <h1>Log In</h1>
-    <form method="POST" action="/login">
-        <label for="ussername">Name</label>
-        <input type="text" id="uname" name="username">
-        <label for="password">Password</label>
-        <input type="password" id="pword" name="password">
-        <label for="email">Password</label>
-        <input type="email" id="eml" name="email">
-        <p>type Comment : </p>
-        <textarea name="comment"placeholder="Remember, be nice!" cols="30" rows="5"></textarea>
-        <p></p>
-        <button type="submit">LOGIN</button>
-    </form>
-</body>
-</html>
-```
-
-homepage.html
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>are Logged In {{.Username}}</h1> 
-    <p>
-        your comment is {{.Comment}}</p>
-</body>
-</html>
-```
-main.css
-```css
-label{
-    color: darkcyan;
-}
-button{
-    background-color: darkgreen;
-    color: floralwhite;
-    width: 200px;
-    height: 3em;
-    text-align: center;
-    display: inline;
-    font-size: medium;
-}
-textarea {
-    width: 400px;
-    height: 20em;
-	}
-```
-
-form.go
-```go
-package main
-
-import (
-	"fmt"
-	"html/template"
-	"net/http"
-	"strings"
-
-	"github.com/gorilla/mux"
-)
-
-//User ...
-type User struct { // DATA MODEL
-	Username string
-	password string
-	email    string
-	Comment  string
-}
-
-func formValidatorStringCount(user *User) bool {
-	if len(user.Username) < 3 || len(user.password) < 6 {
-		return false
-	}
-	return true
-}
-func isLetter(c rune) bool {
-	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
-}
-
-func isWord(s string) bool {
-	for _, c := range s {
-		if !isLetter(c) {
-			return false
-		}
-	}
-	return true
-}
-func isGmail(s string) bool {
-	if strings.ContainsAny(s, "@gmail.com") {
-		return true
-	}
-	return false
-}
-func readForm(res http.ResponseWriter, req *http.Request) {
-	req.ParseForm()
-	user := new(User) // user object created
-	fmt.Println("username - ", req.FormValue("username"))
-	fmt.Println("username - ", req.FormValue("comment"))
-	user.Username = req.FormValue("username")
-	user.password = req.FormValue("password")
-	user.Comment = req.FormValue("comment")
-	user.email = req.FormValue("email")
-
-	if !formValidatorStringCount(user) {
-		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
-		alert("You have to enter at least 6 characters for Password and 3 letters for Name!");
-		</script>`)
-		return
-	}
-
-	if !isWord(user.Username) {
-		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
-		alert("Expecting only letters in Name!");
-		</script>`)
-		return
-	}
-	if isGmail(user.email) {
-		fmt.Fprint(res, `<script type="text/javascript"  charset="utf-8">
-		alert("Expecting only valid gmail in Email!");
-		</script>`)
-		return
-	}
-	parseTemp, _ := template.ParseFiles("templates/htmls/homePage.html")
-	parseTemp.Execute(res, user)
-}
-
-func login(res http.ResponseWriter, req *http.Request) {
-	parseTemp, _ := template.ParseFiles("templates/htmls/form.html")
-	parseTemp.Execute(res, nil)
-}
-func main() {
-	router := mux.NewRouter()
-	router.HandleFunc("/", login).Methods("GET")
-	router.PathPrefix("/styles/").Handler(http.StripPrefix("/styles/", http.FileServer(http.Dir("templates/styles/"))))
-	router.HandleFunc("/login", readForm).Methods("POST")
-	http.ListenAndServe("localhost:8080", router)
-}
-```
 
