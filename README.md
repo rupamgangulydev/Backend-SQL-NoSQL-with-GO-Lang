@@ -1490,7 +1490,7 @@ GetRoute  -> returns a route registered with the given name. This method was ren
 	
 </details>
 
-In this whole Note I try to avoid error handeling as it is so easy that you just replace '_' to err
+In this whole Note I will try to avoid error handeling as it is so easy that you just replace '_' to err
 then you have to add this if block :
 
 ```go
@@ -1626,7 +1626,7 @@ func main() {
 	// Note that it does not treat slashes specially ("/foobar/" will be matched by the prefix "/foo") so you may want to use a trailing slash here.
 	//When you specify a path using PathPrefix() it has an implicit wildcard at the end.
 	//On the other hand, when you specify a path using Path(), there's no such implied wildcard suffix.
-	router.PathPrefix("/styles/").Handler(http.StripPrefix("/styles/", http.FileServer(http.Dir("templates/styles/"))))
+	router.PathPrefix("/styles/").Handler(http.StripPrefix("/styles/", http.FileServer(http.Dir("templates/styles/"))))// actually this is little complicated...
 	http.ListenAndServe("localhost:8080", router)
 }
 
@@ -1672,7 +1672,7 @@ form.html
         <input type="text" id="uname" name="username">
         <label for="password">Password</label>
         <input type="password" id="pword" name="password">
-        <label for="email">Password</label>
+        <label for="email">email</label>
         <input type="email" id="eml" name="email">
         <p>type Comment : </p>
         <textarea name="comment"placeholder="Remember, be nice!" cols="30" rows="5"></textarea>
@@ -1896,6 +1896,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	
 	//Unlike a language like Java (where there are only primitive and reference types),
 	//Go has types to represent textual, numeric, boolean, pointer, composite, function,
 	// and interface values. Once a variable is declared to be of a certain type, it can only carry values of that type.
