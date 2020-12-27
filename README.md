@@ -669,13 +669,15 @@ func main() {
 	slicel := []string{"A", "B", "C", "D", "E", "F", "G"}
 	i := 3
 	fmt.Println(slicel) // [A B C D E F G]
-	slicel[i] = slicel[len(slicel)-1]
-	slicel[len(slicel)-1] = ""
-	slicel = slicel[:len(slicel)-1]
+	slicel[i] = slicel[len(slicel)-1] // D chanded to G
+	slicel[len(slicel)-1] = "" // Last G changed to empty
+	slicel = slicel[:len(slicel)-1] // slice is initialized with different size
 	fmt.Println(slicel) // [A B C G E F]
+
+	// Maintain Order:
 	slicel = []string{"A", "B", "C", "D", "E", "F", "G"}
 	fmt.Println(slicel) // [A B C D E F G]
-	copy(slicel[i:], slicel[i+1:])
+	copy(slicel[i:], slicel[i+1:])//copy(to- slice[from 3rd index to last ] from- slice[from 4th index to Last ] )
 	fmt.Println(slicel) // [A B C E F G G]
 	slicel[len(slicel)-1] = ""
 	fmt.Println(slicel) // [A B C E F G ]
@@ -692,8 +694,11 @@ func main() {
 [A B C E F G ]
 [A B C E F G]
 ```
+
 ### MAP
+
 Maps are a convenient and powerful built-in data structure that associate values of one type (the key) with values of another type (the element or value). The key can be of any type for which the equality operator is defined, such as integers, floating point and complex numbers, strings, pointers, interfaces (as long as the dynamic type supports equality), structs and arrays. Slices cannot be used as map keys, because equality is not defined on them. Like slices, maps hold references to an underlying data structure. If you pass a map to a function that changes the contents of the map, the changes will be visible in the caller.
+
 ```go
 package main
 
@@ -713,21 +718,30 @@ func main() {
 	//  and so the value of myMap above is nil; it doesn't point to an initialized map.
 	// A nil map behaves like an empty map when reading,
 	// but attempts to write to a nil map will cause a runtime panic; don't do that.
-	// To initialize a map, use the built in make function:
+	// To initialize a map, use the built in make function ro := operator :
 	myMap = make(map[int]string)
 	fmt.Println(myMap) //map[]
-	myMapOne := map[int]int{}
+
+	myMapOne := map[int]int{
+
+	}
 	fmt.Println(myMapOne) // map[]
+
+
 	myMap[16] = "I am value of key 16"
 	fmt.Println(myMap) // map[16:I am value of key 16]
 	myMap[17] = "I am value of key 17"
 	fmt.Println(myMap) // map[16:I am value of key 16 17:I am value of key 17]
 	myMap[21] = "I am value of key 21"
 	fmt.Println(myMap) // map[16:I am value of key 16 17:I am value of key 17 21:I am value of key 21]
+	
 	val := myMap[17]
 	fmt.Println(val) // I am value of key 17
-	anotherVal, isPresent := myMap[12345]
+
+	anotherVal, isPresent := myMap[12345] // another value store the value of the specific key if key is present
 	fmt.Println(anotherVal, "->", isPresent) // -> false
+	
+	
 	//The built in delete function removes an entry from the map:
 	delete(myMap, 16)
 	fmt.Println(myMap)      // map[17:I am value of key 17 21:I am value of key 21]
@@ -769,6 +783,7 @@ func main() {
 	myMap[34] = "I am value of key 34"
 	myMap[41] = "I am value of key 41"
 	myMap[4] = "I am value of key 4"
+	
 	var sliceOfKeys []int
 	for k := range myMap {
 		sliceOfKeys = append(sliceOfKeys, k)
@@ -826,8 +841,10 @@ import "fmt"
 
 type Stack []string
 
-var index int
+var index int // global
 
+
+// ----------not play any valid role-----------------
 func push() {
 	index = 3
 	fmt.Println("I am Push function")
@@ -842,8 +859,10 @@ func normalPush0() {
 }
 func (Stack) normalPush1() {
 	fmt.Println("I am normalPush1")
-
 }
+// -----x-----not play any valid role-------x----------
+
+
 func (s Stack) abnormalPush0() {
 	fmt.Println("I am abnormalPush0")
 	s = append(s, "one")
@@ -857,10 +876,10 @@ func (s Stack) abnormalPush1() {
 	fmt.Println("I am abnormalPush1")
 	s = append(s, "zero")
 	fmt.Println(s) // [zero]
-	s = append(s, "minus one")
-	fmt.Println(s) // [zero minus one]
-	s = append(s, "minus two")
-	fmt.Println(s) // [zero minus one minus two]
+	s = append(s, "minusone")
+	fmt.Println(s) // [zero minusone]
+	s = append(s, "minustwo")
+	fmt.Println(s) // [zero minusone minustwo]
 }
 func (s *Stack) pointerPush0() {
 	fmt.Println("pointerPush0")
@@ -877,7 +896,7 @@ func (s *Stack) pointerPush0() {
 	*s = append(*s, "nine")
 	fmt.Println(s) //&[four five six seven eight nine]
 }
-func (s *Stack) pointerPush1() { // invalid receiver type *Stack (Stack is an interface type)
+func (s *Stack) pointerPush1() { 
 	fmt.Println("pointerPush1")
 	*s = append(*s, "ten")
 	fmt.Println(s) // &[four five six seven eight nine ten]
@@ -906,22 +925,20 @@ func main() {
 	var st Stack
 	//normalPush1() // undefined: normalPush1
 	st.normalPush1() // I am normalPush1
-	st.abnormalPush0()
 	
+	st.abnormalPush0()
 	// I am abnormalPush0
 	// [one]
 	// [one two]
 	// [one two three]
 	
 	st.abnormalPush1()
-	
 	// I am abnormalPush1
 	// [zero]
-	// [zero minus one]
-	// [zero minus one minus two]
+	// [zero minusone]
+	// [zero minusone minustwo]
 	
 	st.pointerPush0()
-	
 	// pointerPush0
 	// &[four]
 	// &[four five]
@@ -931,7 +948,6 @@ func main() {
 	// &[four five six seven eight nine]
 	
 	st.pointerPush1()
-	
 	// pointerPush1
 	// &[four five six seven eight nine ten]
 	// &[four five six seven eight nine ten eleven]
@@ -978,6 +994,8 @@ pointerPush1
 &[four five six seven eight nine ten eleven twelve thirteen fourteen]
 &[four five six seven eight nine ten eleven twelve thirteen fourteen fifteen]
 ```
+
+
 ### STACK
 ```go
 // A stack is an ordered data structure that follows the Last-In-First-Out (LIFO) principle.
@@ -1191,6 +1209,7 @@ func (l *LinkedList) insertAt(item interface{}, index int) {
 	}
 	l.size++
 }
+
 func (l *LinkedList) deleteAt(index int) {
 	if index < l.size {
 		if index == 0 {
