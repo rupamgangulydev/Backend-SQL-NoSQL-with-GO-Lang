@@ -2156,3 +2156,5 @@ func main() {
 	http.ListenAndServe("localhost:8080", router)
 }
 ```
+
+<img src="ASSETS/MysQlCRUDdemoVideo.gif">
